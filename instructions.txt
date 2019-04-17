@@ -1,0 +1,16 @@
+source venv/bin/activate
+
+sudo apt-get install mysql-server libmysqlclient-dev
+
+pip3 install Flask-SQLAlchemy
+
+pip3 install Flask
+
+pip3 install Flask-mysqldb	
+
+pip3 install -r requirements.txt
+
+python3 app.py -- to check to make sure evrything works
+
+
+
