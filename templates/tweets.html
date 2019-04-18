@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+      	{% for t in tweets %}
+        <h5>{{t.user.name}}</h5>
+        <h5>{{t.text}}</h5>         
+        {% endfor %}
+
+
+{% endblock %}
