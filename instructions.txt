@@ -12,5 +12,20 @@ pip3 install -r requirements.txt
 
 FLASK_APP=app.py flask run --reload -- to check to make sure evrything works
 
+######################################
+
+ this part is for me with the hosting stuff
+
+ git init.
+
+ git create
+
+ get add .
+
+ git commit -m " comment "
+
+ git push heroku master
+
+
 
 

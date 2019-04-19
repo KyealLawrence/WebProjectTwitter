@@ -1,5 +1,5 @@
 
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template,url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_mysqldb import MySQL
 import tweepy
@@ -43,3 +43,7 @@ def table():
 def getfilteredtweets():
 	filtered = tweepy.Cursor(api.search,q="gameofthrones").items(10)
 	return render_template('tweets.html',tweets=filtered)
+
+@app.route("/profile")
+def getprofile():
+	return render_template('profile.html')

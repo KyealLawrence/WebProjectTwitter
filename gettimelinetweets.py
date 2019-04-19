@@ -11,10 +11,23 @@ access_token_secret="UI9YBbbaExHZwPtKo96aGiUQzxX8QO2qv5Gvr8vKnGn4w"
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 
-api = tweepy.API(auth)
+api = tweepy.API(auth,wait_on_rate_limit=True)
 
-new_tweets = api.home_timeline(count=40)
+new_tweets = api.home_timeline(count=5)
 
-for tweets in new_tweets:
-	print(tweets.user.name+": Tweet :"+tweets.text)
-	#add more parameters to save stuff
+def get_tweets(tweets):
+	for tweet in tweets:
+		print(" Tweeter profile ult :"+tweet.user.profile_image_url_https)
+		print(tweet.user.name+"  @"+tweet.user.screen_name+" Tweeted from "+tweet.source)
+		print("Tweet Message : " + tweet.text)
+		print("Tweet Favorited count \t:" + str(tweet.favorite_count))	
+		print(tweet.user.location)
+		# Display sender and mentions user
+		if hasattr(tweet, 'retweeted_status'):
+			print("Tweet send by : " + tweet.retweeted_status.user.screen_name)
+			id_of_tweet=tweet.retweeted_status.id_str
+			tweet = api.get_status(id=id_of_tweet)
+			print("Original tweet : "+tweet.text)
+		
+
+get_tweets(new_tweets)
