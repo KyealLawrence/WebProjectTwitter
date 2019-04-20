@@ -19,9 +19,9 @@ Jinja2==2.10
 MarkupSafe==1.1.1
 mysqlclient==1.4.2.post1
 oauth2==1.9.0.post1
-oauthlib==2.1.0
+oauthlib==2.0.6
 pycparser==2.19
-PyJWT==1.4.2
+pyjwt==1.6.0
 PySocks==1.6.8
 requests==2.21.0
 requests-oauthlib==1.2.0
@@ -31,3 +31,5 @@ tweepy==3.7.0
 urllib3==1.24.2
 Werkzeug==0.15.1
 WTForms==2.2.1
+requests-oauthlib==0.8.0
+mock==2.0.0
