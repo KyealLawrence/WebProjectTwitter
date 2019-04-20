@@ -20,7 +20,6 @@ MarkupSafe==1.1.1
 mysqlclient==1.4.2.post1
 oauth2==1.9.0.post1
 oauthlib==2.1.0
-pkg-resources==0.0.0
 pycparser==2.19
 PyJWT==1.4.2
 PySocks==1.6.8
