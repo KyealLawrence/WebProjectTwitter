@@ -46,6 +46,7 @@ def getprofile2():
 	auth.set_access_token(access_token, access_token_secret)
 	user = tweepy.API(auth)
 	singin = user.me()
+	api = tweepy.API(auth)
 	
 	followers = str(singin.followers_count)
 	following = str(singin.friends_count)
