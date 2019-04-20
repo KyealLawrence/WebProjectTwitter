@@ -41,8 +41,8 @@ def auth():
     session['request_token'] = auth.request_token
     return redirect(url)
 
-@app.route("/profile2")
-def getprofile2():
+@app.route("/profile")
+def getprofile():
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
 	auth.set_access_token(access_token, access_token_secret)
 	user = tweepy.API(auth)
@@ -54,7 +54,7 @@ def getprofile2():
 	tweets = str(singin.statuses_count)
 	favtweets = str(singin.favourites_count)
 	x = randint(1,50)
-	friend = tweepy.Cursor(api.followers, screen_name=singin.name).items(x)
+	friend = tweepy.Cursor(user.followers, screen_name=singin.name).items(x)
 	for f in friend:
 		friendurl=f.profile_image_url
 		friendname=f.name
@@ -62,7 +62,7 @@ def getprofile2():
 		friendtweet=f.status.text
 
 
-	new_tweets = api.user_timeline(count=20)
+	new_tweets = user.user_timeline(count=20)
 
 
 	user = {
@@ -115,43 +115,6 @@ def getfilteredtweets():
 	filtered = tweepy.Cursor(api.search,q="gameofthrones").items(10)
 	return render_template('tweets.html',tweets=filtered)
 
-@app.route("/profile")
-def getprofile():
-	followers = str(my_info.followers_count)
-	following = str(my_info.friends_count)
-	tweets = str(my_info.statuses_count)
-	favtweets = str(my_info.favourites_count)
-	x = randint(1,50)
-	friend = tweepy.Cursor(api.followers, screen_name=my_info.name).items(x)
-	for f in friend:
-		friendurl=f.profile_image_url
-		friendname=f.name
-		friendat=f.screen_name
-		friendtweet=f.status.text
-
-
-	new_tweets = api.user_timeline(count=20)
-
-
-	user = {
-		'username':my_info.name,
-		'at':my_info.screen_name,
-		'bio':my_info.description,
-		'followers':followers,
-		'following':following,
-		'tweets':tweets,
-		'favtweets':favtweets,
-		'website':my_info.url,
-		'datecreated':my_info.created_at,
-		'profilepic':my_info.profile_image_url,
-		'friendurl':friendurl,
-		'friendname':friendname,
-		'friendat':friendat,
-		'friendtweet':friendtweet,
-		'hometweets':new_tweets,
-		}	
-
-	return render_template('profile.html', user=user)
 
 
 @app.route("/friends")
