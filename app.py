@@ -87,14 +87,15 @@ def getprofile2():
 def twitter_callback():
 	api = tweepy.API(auth)
 	my_info = api.me()
-    request_token = session['request_token']
-    del session['request_token']
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
-    auth.request_token = request_token
-    verifier = request.args.get('oauth_verifier')
-    auth.get_access_token(verifier)
-    session['token'] = (auth.access_token, auth.access_token_secret)
-    return redirect('/profile2')
+	request_token = session['request_token']
+	del session['request_token']
+	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
+	auth.request_token = request_token
+	verifier = request.args.get('oauth_verifier')
+	auth.get_access_token(verifier)
+	session['token'] = (auth.access_token, auth.access_token_secret)
+	return redirect('/profile2')
+    
 
 
 @app.route("/")
