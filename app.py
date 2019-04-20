@@ -54,7 +54,7 @@ def getprofile():
 	following = str(my_info.friends_count)
 	tweets = str(my_info.statuses_count)
 	favtweets = str(my_info.favourites_count)
-	x = randint(1,100)
+	x = randint(1,50)
 	friend = tweepy.Cursor(api.followers, screen_name=my_info.name).items(x)
 	for f in friend:
 		friendurl=f.profile_image_url
