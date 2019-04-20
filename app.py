@@ -20,7 +20,7 @@ access_token_secret="UI9YBbbaExHZwPtKo96aGiUQzxX8QO2qv5Gvr8vKnGn4w"
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
-
+my_info = user.me()
 
 
 app.config['MYSQL_HOST'] = 'remotemysql.com'
@@ -46,14 +46,14 @@ def getprofile2():
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
 	auth.set_access_token(token, token_secret)
 	user = tweepy.API(auth)
-	my_info = user.me()
+	singin = user.me()
 	
-	followers = str(my_info.followers_count)
-	following = str(my_info.friends_count)
-	tweets = str(my_info.statuses_count)
-	favtweets = str(my_info.favourites_count)
+	followers = str(singin.followers_count)
+	following = str(singin.friends_count)
+	tweets = str(singin.statuses_count)
+	favtweets = str(singin.favourites_count)
 	x = randint(1,50)
-	friend = tweepy.Cursor(api.followers, screen_name=my_info.name).items(x)
+	friend = tweepy.Cursor(api.followers, screen_name=singin.name).items(x)
 	for f in friend:
 		friendurl=f.profile_image_url
 		friendname=f.name
@@ -65,16 +65,16 @@ def getprofile2():
 
 
 	user = {
-		'username':my_info.name,
-		'at':my_info.screen_name,
-		'bio':my_info.description,
+		'username':singin.name,
+		'at':singin.screen_name,
+		'bio':singin.description,
 		'followers':followers,
 		'following':following,
 		'tweets':tweets,
 		'favtweets':favtweets,
-		'website':my_info.url,
-		'datecreated':my_info.created_at,
-		'profilepic':my_info.profile_image_url,
+		'website':singin.url,
+		'datecreated':singin.created_at,
+		'profilepic':singin.profile_image_url,
 		'friendurl':friendurl,
 		'friendname':friendname,
 		'friendat':friendat,
