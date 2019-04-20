@@ -7,16 +7,16 @@ import sys
 from random import randint
 import os
 from authlib.flask.client import OAuth
-SECRET_KEY = 'development key'
+SECRET_KEY = 'Please work'
 
 
 app = Flask(__name__)
 mysql = MySQL(app)
 app.secret_key = SECRET_KEY
-consumer_key="sd47vblI6MNSEXXOdQw26KUpn"
-consumer_secret="z6IvOle6ImR3yGSJ5GLeudB0XMfjUOt3MFPPHtdVy5zw8QyjFV"
-access_token="513405864-ocNwIksfXSgjImZHlM2HuinDGmYfpnpFJbNIIC1Z"
-access_token_secret="UI9YBbbaExHZwPtKo96aGiUQzxX8QO2qv5Gvr8vKnGn4w"
+consumer_key="SZDw1y6xV30grFmnNQcm7Wp4Z"
+consumer_secret="r3xR5eVKMySvbTAc3mExgaZZw9NwLmzSbyYksi3E8GnDxYug7H"
+access_token="513405864-ceWliYQUYlGGcg1FduKRDpHslL83eRDuI1z69aVK"
+access_token_secret="mZB3zIWNQBAbHWmgfwmzTy9nHWlMHh7U7QHZ18Q3z2k9g"
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 
