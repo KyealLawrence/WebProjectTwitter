@@ -20,7 +20,6 @@ access_token_secret="UI9YBbbaExHZwPtKo96aGiUQzxX8QO2qv5Gvr8vKnGn4w"
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
-my_info = api.me()
 
 
 
@@ -46,8 +45,8 @@ def auth():
 def getprofile2():
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
 	auth.set_access_token(token, token_secret)
-	api = tweepy.API(auth)
-	my_info = api.me()
+	user = tweepy.API(auth)
+	my_info = user.me()
 	
 	followers = str(my_info.followers_count)
 	following = str(my_info.friends_count)
