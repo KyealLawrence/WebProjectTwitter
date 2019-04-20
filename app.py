@@ -6,7 +6,7 @@ import tweepy
 import sys
 from random import randint
 import os
-from flask_oauth import OAuth
+from authlib.flask.client import OAuth
 SECRET_KEY = 'development key'
 
 
