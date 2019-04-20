@@ -63,7 +63,7 @@ def getprofile():
 		friendtweet=f.status.text
 
 
-	new_tweets = api.user_timeline(count=10)
+	new_tweets = api.user_timeline(count=20)
 
 
 	user = {
