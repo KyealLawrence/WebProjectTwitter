@@ -45,7 +45,7 @@ def auth():
 def getprofile():
 	token, token_secret = session['token']
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
-	auth.set_access_token(oken,token_secret)
+	auth.set_access_token(token,token_secret)
 	user = tweepy.API(auth)
 	singin = user.me()
 
