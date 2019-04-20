@@ -19,7 +19,8 @@ access_token="513405864-ceWliYQUYlGGcg1FduKRDpHslL83eRDuI1z69aVK"
 access_token_secret="mZB3zIWNQBAbHWmgfwmzTy9nHWlMHh7U7QHZ18Q3z2k9g"
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
-
+api = tweepy.API(auth)
+my_info= api.me()
 
 
 app.config['MYSQL_HOST'] = 'remotemysql.com'
@@ -46,7 +47,7 @@ def getprofile2():
 	auth.set_access_token(access_token, access_token_secret)
 	user = tweepy.API(auth)
 	singin = user.me()
-	api = tweepy.API(auth)
+
 	
 	followers = str(singin.followers_count)
 	following = str(singin.friends_count)
@@ -86,8 +87,6 @@ def getprofile2():
 
 @app.route('/callback')
 def twitter_callback():
-	api = tweepy.API(auth)
-	my_info = api.me()
 	request_token = session['request_token']
 	del session['request_token']
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
@@ -113,15 +112,11 @@ def table():
 
 @app.route("/filteredtweets",methods=['GET'])
 def getfilteredtweets():
-	api = tweepy.API(auth)
-	my_info = api.me()
 	filtered = tweepy.Cursor(api.search,q="gameofthrones").items(10)
 	return render_template('tweets.html',tweets=filtered)
 
 @app.route("/profile")
 def getprofile():
-	api = tweepy.API(auth)
-	my_info = api.me()
 	followers = str(my_info.followers_count)
 	following = str(my_info.friends_count)
 	tweets = str(my_info.statuses_count)
