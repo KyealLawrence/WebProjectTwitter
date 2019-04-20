@@ -32,3 +32,4 @@ senseapi==0.6.0
 oauth==1.0.1
 oauthlib==1.0.3
 requests-oauthlib==0.6.1
+Authlib==0.11
