@@ -28,7 +28,7 @@ def get_user_informations(user):
   
 
 
-users = tweepy.Cursor(api.followers, screen_name="KyealLawrence").items()
+users = tweepy.Cursor(api.followers, screen_name=my_info.name).items()
 
 while True:
     try:

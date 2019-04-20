@@ -13,7 +13,7 @@ auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth,wait_on_rate_limit=True)
 
-new_tweets = api.home_timeline(count=5)
+new_tweets = api.user_timeline(count=10)
 
 def get_tweets(tweets):
 	for tweet in tweets:

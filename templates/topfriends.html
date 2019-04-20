@@ -1,0 +1,12 @@
+{% extends "profile.html" %}
+
+{% for a in friend %}
+			{{a[0][1]}}
+			
+            <div class="col-6 col-sm-3 placeholder">
+              <img src="{{a[0][0]}}" width="160" height="180" alt="Generic placeholder thumbnail">
+              <h4>{{a[0][1]}}</h4>
+              <div class="text-muted">{{a[0][2]}}</div>
+            </div>
+
+            {% endfor %}

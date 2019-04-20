@@ -15,7 +15,7 @@
       <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">User name</a>
+      <a class="navbar-brand" href="#">{{user.username}}</a>
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
@@ -39,49 +39,49 @@
             <li class="nav-item">
               <a class="nav-link active" href="#">Profile <span class="sr-only">(current)</span></a>
               <div class="col-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-              <h4>Username</h4>
-              <div class="text-muted">ur @</div>
+              <img src="{{user.profilepic}}" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
+              <h4>{{user.username}}</h4>
+              <div class="text-muted">{{user.at}}</div>
             </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link"><strong>Bio</strong> The highest form of human intelligence is to observe yourself without judgement</a>
+              <a class="nav-link"><strong>Bio :</strong>{{user.bio}}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Followers 1313</a>
+              <a class="nav-link" href="#">Followers {{user.followers}}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Following 1334 </a>
+              <a class="nav-link" href="#">Following {{user.following}} </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link">Tweets 2442</a>
-            </li>
-          </ul>
-
-          <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Favourited Tweets 4242</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"> Website </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"></a>
+              <a class="nav-link">Tweets {{user.tweets}}</a>
             </li>
           </ul>
 
           <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="#"></a>
+              <a class="nav-link" href="#">Favourited Tweets {{user.favtweets}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{user.Website}}"> Website </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#"></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Created : 2012-03-03 17:37:57 </a>
+              <a class="nav-link" href="#"></a>
+            </li>
+          </ul>
+
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="#"></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">{{datecreated}} </a>
             </li>
           </ul>
         </nav>
@@ -89,28 +89,17 @@
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
           <h1>Top Friends</h1>
 
+            
           <section class="row text-center placeholders">
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="/static/images/user.png" width="160" height="180" alt="Generic placeholder thumbnail">
-              <h4>someone you follow</h4>
-              <div class="text-muted">Username</div>
+            
+              <div class="col-6 col-sm-3 placeholder">
+              <img src="{{user.friendurl}}" width="120" height="150" alt="Generic placeholder thumbnail">
+              <h4>{{user.friendname}}</h4>
+              <div class="text-muted">{{user.friendat}}</div>
             </div>
             <div class="col-6 col-sm-3 placeholder">
-              <img src="/static/images/user.png" width="160" height="180" alt="Generic placeholder thumbnail">
-              <h4>someone you follow</h4>
-              <div class="text-muted">Username</div>
+              <div class="text-muted">{{user.friendtweet}}</div>
             </div>
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="/static/images/user.png" width="160" height="180" alt="Generic placeholder thumbnail">
-              <h4>someone you follow</h4>
-              <div class="text-muted">Username</div>
-            </div>
-            <div class="col-6 col-sm-3 placeholder">
-              <img src="/static/images/user.png" width="160" height="180" alt="Generic placeholder thumbnail">
-              <h4>someone you follow </h4>
-              <div class="text-muted">Username</div>
-            </div>
-
           </section>
 
           <h2>Your Tweets</h2>
@@ -126,39 +115,23 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="40" height="40" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail"> <br>@<br>username </td>
-                  <td>There cannot be peace without great suffering. The greater tje suffering, the greater the peace.</td>
-                  <td>9765</td>
-                  <td>tweeted from iphone</td>
-                  <td>Trinidad & Tobago</td>
-                </tr>
-                <tr>
-                  <td><img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="40" height="40" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail"> <br>@<br>username </td>
-                  <td>There cannot be peace without great suffering. The greater tje suffering, the greater the peace.</td>
-                  <td>9765</td>
-                  <td>tweeted from iphone</td>
-                  <td>Trinidad & Tobago</td>
-                </tr>
-                <tr>
-                  <td><img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="40" height="40" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail"> <br>@<br>username </td>
-                  <td>There cannot be peace without great suffering. The greater tje suffering, the greater the peace.</td>
-                  <td>9765</td>
-                  <td>tweeted from iphone</td>
-                  <td>Trinidad & Tobago</td>
-                </tr>
-               
+
+                {% for f in user.hometweets %}
+                    <tr>
+                      <td><img src="{{f.user.profile_image_url_https}}" width="40" height="40" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail"> <br>@{{f.user.screen_name}}<br>{{f.name}} </td>
+                    <td><br>{{f.text}}</td>
+                    <td>{{f.favorite_count}}</td>
+                    <td>{{f.source}}</td>
+                    <td>{{f.user.location}}</td>
+                  </tr>
+                {% endfor %}
               </tbody>
+
             </table>
           </div>
         </main>
       </div>
     </div>
-
-
-
-  {% block content %}
-  {% endblock %} 
   
 </body>
 </html>
