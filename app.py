@@ -48,7 +48,6 @@ def getprofile():
 	user = tweepy.API(auth)
 	singin = user.me()
 
-	
 	followers = str(singin.followers_count)
 	following = str(singin.friends_count)
 	tweets = str(singin.statuses_count)
@@ -94,7 +93,7 @@ def twitter_callback():
 	verifier = request.args.get('oauth_verifier')
 	auth.get_access_token(verifier)
 	session['token'] = (auth.access_token, auth.access_token_secret)
-	return redirect('/profile2')
+	return redirect('/profile')
     
 
 
