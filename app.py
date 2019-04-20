@@ -1,15 +1,18 @@
 
-from flask import Flask, request, jsonify, render_template,url_for
+from flask import Flask, request, jsonify, render_template,url_for,session,redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_mysqldb import MySQL
 import tweepy
 import sys
 from random import randint
 import os
+from flask_oauth import OAuth
+SECRET_KEY = 'development key'
+
 
 app = Flask(__name__)
 mysql = MySQL(app)
-
+app.secret_key = SECRET_KEY
 consumer_key="sd47vblI6MNSEXXOdQw26KUpn"
 consumer_secret="z6IvOle6ImR3yGSJ5GLeudB0XMfjUOt3MFPPHtdVy5zw8QyjFV"
 access_token="513405864-ocNwIksfXSgjImZHlM2HuinDGmYfpnpFJbNIIC1Z"
@@ -28,6 +31,70 @@ app.config['MYSQL_DB'] = '6iY42OOgiZ'
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
+
+
+callback = 'https://floating-cliffs-24637.herokuapp.com/callback'
+
+@app.route('/auth')
+def auth():
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
+    url = auth.get_authorization_url()
+    session['request_token'] = auth.request_token
+    return redirect(url)
+
+@app.route("/profile2")
+def getprofile2():
+	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
+	auth.set_access_token(token, token_secret)
+	api = tweepy.API(auth)
+	my_info = api.me()
+	
+	followers = str(my_info.followers_count)
+	following = str(my_info.friends_count)
+	tweets = str(my_info.statuses_count)
+	favtweets = str(my_info.favourites_count)
+	x = randint(1,50)
+	friend = tweepy.Cursor(api.followers, screen_name=my_info.name).items(x)
+	for f in friend:
+		friendurl=f.profile_image_url
+		friendname=f.name
+		friendat=f.screen_name
+		friendtweet=f.status.text
+
+
+	new_tweets = api.user_timeline(count=20)
+
+
+	user = {
+		'username':my_info.name,
+		'at':my_info.screen_name,
+		'bio':my_info.description,
+		'followers':followers,
+		'following':following,
+		'tweets':tweets,
+		'favtweets':favtweets,
+		'website':my_info.url,
+		'datecreated':my_info.created_at,
+		'profilepic':my_info.profile_image_url,
+		'friendurl':friendurl,
+		'friendname':friendname,
+		'friendat':friendat,
+		'friendtweet':friendtweet,
+		'hometweets':new_tweets,
+		}	
+
+	return render_template('profile.html', user=user)
+
+@app.route('/callback')
+def twitter_callback():
+    request_token = session['request_token']
+    del session['request_token']
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
+    auth.request_token = request_token
+    verifier = request.args.get('oauth_verifier')
+    auth.get_access_token(verifier)
+    session['token'] = (auth.access_token, auth.access_token_secret)
+    return redirect('/profile2')
 
 
 @app.route("/")
@@ -90,3 +157,7 @@ def getprofile():
 @app.route("/friends")
 def getfriends():
 	return render_template('friends.html')
+
+@app.route("/test")
+def signin():
+	return render_template('singin.html')
