@@ -30,6 +30,5 @@ Werkzeug==0.15.1
 WTForms==2.2.1
 senseapi==0.6.0
 oauth==1.0.1
-oauth2==1.5.211
 oauthlib==1.0.3
 requests-oauthlib==0.6.1
