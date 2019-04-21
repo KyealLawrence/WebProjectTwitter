@@ -131,9 +131,10 @@ def timeline():
 	token, token_secret = session['token']
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
 	auth.set_access_token(token,token_secret)
+	user = tweepy.API(auth)
 	singin = user.me()
 	new_tweets = user.home_timeline(count=5)
-	users = tweepy.Cursor(users.followers, screen_name=singin.name).items(10)
+	users = tweepy.Cursor(user.followers, screen_name=singin.name).items(10)
 	return render_template('home.html',tweets=new_tweets,me=singin,users=users)
 
 
