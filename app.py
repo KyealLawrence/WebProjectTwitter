@@ -128,8 +128,9 @@ def getfriends():
 
 @app.route("/timeline")
 def timeline():	
-	users = tweepy.Cursor(api.followers, screen_name=my_info.name).items(10)
-	return render_template('home.html',tweets=new_tweets,me=my_info,users=users)
+	new_tweets = user.home_timeline(count=5)
+	users = tweepy.Cursor(user.followers, screen_name=singin.name).items(10)
+	return render_template('home.html',tweets=new_tweets,me=singin,users=users)
 
 
 @app.route("/signup", methods=['GET','POST'])
