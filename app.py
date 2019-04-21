@@ -161,7 +161,9 @@ def login():
 		cursor = conn.cursor()
 		cursor.execute("select password from Users where email ='"+email+"'")
 		record = cursor.fetchall()
-		record = record[0]
+		if (len(record)==0):
+			message = " No Account associated with that email"
+			return render_template('register.html',message=message)
 		for word in record:
 			print(word)
 			if password == word:
