@@ -35,8 +35,8 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
 authorized = {
-	'token':token,
-	'token_secret':token_secret,
+	'token':"",
+	'token_secret':"",
 }
 
 callback = 'https://floating-cliffs-24637.herokuapp.com/callback'
