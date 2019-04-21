@@ -7,16 +7,20 @@ import sys
 from random import randint
 import os
 from authlib.flask.client import OAuth
-SECRET_KEY = 'Please work'
+
 
 
 app = Flask(__name__)
 mysql = MySQL(app)
+
+SECRET_KEY = 'Please work'
 app.secret_key = SECRET_KEY
+
 consumer_key="SZDw1y6xV30grFmnNQcm7Wp4Z"
 consumer_secret="r3xR5eVKMySvbTAc3mExgaZZw9NwLmzSbyYksi3E8GnDxYug7H"
 access_token="513405864-ceWliYQUYlGGcg1FduKRDpHslL83eRDuI1z69aVK"
 access_token_secret="mZB3zIWNQBAbHWmgfwmzTy9nHWlMHh7U7QHZ18Q3z2k9g"
+
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
@@ -44,6 +48,12 @@ def auth():
 @app.route("/profile")
 def getprofile():
 	token, token_secret = session['token']
+	
+	sql_select_Query = "INSERT INTO 'sessioninfo'('token', 'token_secret') VALUES (%s,%s)",(token,token_secret)
+	cursor = mysql.connection.cursor()
+	cursor.execute(sql_select_Query)
+	connection.commit()
+	connection.close()
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
 	auth.set_access_token(token,token_secret)
 	user = tweepy.API(auth)

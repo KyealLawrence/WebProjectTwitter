@@ -13,7 +13,7 @@ auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth,wait_on_rate_limit=True)
 
-new_tweets = api.home_timeline(count=10)
+new_tweets = api.home_timeline(count=1)
 
 def get_tweets(tweets):
 	for tweet in tweets:
@@ -23,6 +23,7 @@ def get_tweets(tweets):
 		print("Tweet Favorited count \t:" + str(tweet.favorite_count))	
 		print(tweet.user.location)
 		print(tweet.created_at)
+		print(tweet.retweet_count)
 		# Display sender and mentions user
 		if hasattr(tweet, 'retweeted_status'):
 			print("Tweet send by : " + tweet.retweeted_status.user.screen_name)
