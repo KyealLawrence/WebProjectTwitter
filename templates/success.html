@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    </head>
+    <style>
+        
+        body {
+            font-family: "Open Sans", sans-serif;
+            height: 100vh;
+            background: url("https://cdn.webshopapp.com/shops/41466/files/133965302/walimex-background-graduation-15x2m-blue.jpg") 50% fixed;
+            background-size: cover;
+
+           
+
+          }
+        .wrapper {
+            margin-top: 100px ;
+            display:flex;
+            align-items: center;
+            flex-direction: column; 
+            justify-content: center;
+            width: 100%;
+            min-height: 200%;
+            padding: 90px;
+            background: rgba(33,150,243,0.14);
+            
+        }
+        .login {
+        
+            border-radius: 2px 2px 5px 50px;
+            padding: 10px 20px 20px 20px;
+            width: 90%;
+            max-width: 320px;
+            background: #ffffff;
+            position: relative;
+            padding-bottom: 80px;
+            box-shadow: 0px 1px 5px rgba(0,0,0,0.3);
+        }
+
+        input {
+            display: block;
+            padding: 15px 10px;
+            margin-bottom: 10px;
+            width: 100%;
+            border: 1px solid #ddd;
+            transition: border-width 0.2s ease;
+            border-radius: 2px;
+            color: #ccc;
+        }
+
+        .title {
+            color: #444;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 10px 0 30px 0;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+          }
+        
+          button{
+            margin: -20px -50px; 
+            position:relative;
+            top:50%; 
+            left:50%;
+            
+        }
+
+        .shake {
+            -webkit-animation-name: shake;
+            animation-name: shake;
+          }
+
+    #login{
+      width:250px;
+    }
+
+    #reg{
+      width: 250px;
+      margin-right: 100px; 
+    }
+    
+    </style>
+    <script type="text/javascript">
+       var check = function()
+        {
+          if (document.getElementById('pwdReg').value ==document.getElementById('cpwdReg').value) 
+            {
+              document.getElementById('message').style.color = 'green';
+              document.getElementById('message').innerHTML = 'matching';
+            } else {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = 'not matching';
+            }
+        }
+    </script>
+
+    <body>
+    <div class="animated bounceInDown">
+      <div class="wrapper">
+
+        {% if message %}
+          <h1 class="error"><strong>{{message}}</strong></h1>
+        {% endif %}
+        
+        <div class="row">
+
+          <div class="span6">
+        </div>
+    </body>
+</html>

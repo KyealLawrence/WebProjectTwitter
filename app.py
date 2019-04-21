@@ -34,10 +34,7 @@ app.config['MYSQL_DB'] = '6iY42OOgiZ'
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
-authorized = {
-	'token':"",
-	'token_secret':"",
-}
+
 
 callback = 'https://floating-cliffs-24637.herokuapp.com/callback'
 
@@ -134,3 +131,47 @@ def timeline():
 	users = tweepy.Cursor(api.followers, screen_name=my_info.name).items(10)
 
 	return render_template('home.html',tweets=new_tweets,me=my_info,users=users)
+
+
+@app.route("/signup", methods=['GET','POST'])
+def signup():
+	if request.method == 'POST':
+		message = " Account created !"
+		fail = " Error in creating account please try again"
+		email = request.form['email']
+		password = request.form['confirmpassword']
+		conn = mysql.connect
+		cursor = conn.cursor()
+		try:
+			cursor.execute("Insert Into Users (email, password) VALUES ('" + email + "', '" + password + "')")
+			conn.commit()
+			return render_template('register.html',message=message,success=email)
+		except Exception as e:
+			print(e)
+	return render_template('register.html',message=fail)
+
+@app.route("/login", methods=['GET','POST'])
+def login():
+	if request.method =='POST':
+		message = "Login failed invalid password !"
+		yay = " successfully logged in ....... now what ?"
+		email = str(request.form['email'])
+		password = str(request.form['password'])
+		conn = mysql.connect
+		cursor = conn.cursor()
+		cursor.execute("select password from Users where email ='"+email+"'")
+		record = cursor.fetchall()
+		record = record[0]
+		for word in record:
+			print(word)
+			if password == word:
+				return render_template('success.html',message=yay)
+		return render_template('register.html',message=message)
+
+
+	
+@app.route("/analytics")
+def analytics():
+
+	return render_template('register.html')
+
