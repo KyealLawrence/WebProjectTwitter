@@ -101,3 +101,9 @@ for x in range(4):
     furl = top[number].profile_image_url
     fname = top[number].name
     fat = top[number].screen_name
+
+    sql_select_Query = "insert into 'sessioninfo' ('token', 'token_secret') VALUES (%s,%s)",(token,token_secret)
+  cursor = mysql.connection.cursor()
+  cursor.execute(sql_select_Query)
+  connection.commit()
+  connection.close()
