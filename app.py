@@ -34,7 +34,10 @@ app.config['MYSQL_DB'] = '6iY42OOgiZ'
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
-tokens = []
+authorized = {
+	'token':token,
+	'token_secret':token_secret,
+}
 
 callback = 'https://floating-cliffs-24637.herokuapp.com/callback'
 
@@ -48,7 +51,9 @@ def auth():
 @app.route("/profile")
 def getprofile():
 	token, token_secret = session['token']
-	tokens.append(token)
+	authorized['token'] = token
+	authorized['token_secret'] = token_secret
+
 	tokens.append(token_secret)
 	
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
@@ -130,7 +135,7 @@ def getfriends():
 @app.route("/timeline")
 def timeline():
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
-	auth.set_access_token(tokens,tokens)
+	auth.set_access_token(authorized.get('token'),authorized.get('token_secret'))
 	api = tweepy.API(auth)
 
 	new_tweets = api.home_timeline(count=5)
