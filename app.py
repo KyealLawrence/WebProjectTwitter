@@ -190,5 +190,9 @@ def tweet():
 		user = tweepy.API(auth)
 		singin = user.me()
 		user.update_status(tweet)
-	return render_template('home.html')
+		singin = user.me()
+		new_tweets = user.home_timeline(count=5)
+		users = tweepy.Cursor(user.followers, screen_name=singin.name).items(10)
+		return render_template('home.html',tweets=new_tweets,me=singin,users=users)
+
 
