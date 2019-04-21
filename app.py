@@ -64,7 +64,7 @@ def getprofile():
 		friendurl=f.profile_image_url
 		friendname=f.name
 		friendat=f.screen_name
-		friendtweet=f.status.text
+		friendtweet=f.status.description
 
 	new_tweets = user.user_timeline(count=20)
 
