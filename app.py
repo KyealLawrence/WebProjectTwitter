@@ -34,7 +34,7 @@ app.config['MYSQL_DB'] = '6iY42OOgiZ'
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 
-
+tokens = []
 
 callback = 'https://floating-cliffs-24637.herokuapp.com/callback'
 
@@ -48,13 +48,9 @@ def auth():
 @app.route("/profile")
 def getprofile():
 	token, token_secret = session['token']
-
+	tokens.append(token)
+	tokens.append(token_secret)
 	
-	sql_select_Query = "insert into 'sessioninfo' ('token', 'token_secret') VALUES (%s,%s)",(token,token_secret)
-	cursor = mysql.connection.cursor()
-	cursor.execute(sql_select_Query)
-	connection.commit()
-	connection.close()
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
 	auth.set_access_token(token,token_secret)
 	user = tweepy.API(auth)
