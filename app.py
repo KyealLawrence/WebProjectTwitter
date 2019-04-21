@@ -24,6 +24,7 @@ access_token_secret="mZB3zIWNQBAbHWmgfwmzTy9nHWlMHh7U7QHZ18Q3z2k9g"
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
+new_tweets = api.home_timeline(count=5)
 my_info= api.me()
 
 
@@ -126,10 +127,8 @@ def getfriends():
 	return render_template('friends.html')
 
 @app.route("/timeline")
-def timeline():
-	new_tweets = api.home_timeline(count=5)
+def timeline():	
 	users = tweepy.Cursor(api.followers, screen_name=my_info.name).items(10)
-
 	return render_template('home.html',tweets=new_tweets,me=my_info,users=users)
 
 
@@ -174,6 +173,5 @@ def login():
 	
 @app.route("/analytics")
 def analytics():
-
 	return render_template('register.html')
 
