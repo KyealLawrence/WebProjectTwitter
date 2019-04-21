@@ -54,7 +54,6 @@ def getprofile():
 	authorized['token'] = token
 	authorized['token_secret'] = token_secret
 
-	tokens.append(token_secret)
 	
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
 	auth.set_access_token(token,token_secret)
