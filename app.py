@@ -47,11 +47,10 @@ def auth():
 
 @app.route("/profile")
 def getprofile():
-	token1 =""
-	token_secret1=""
+	token1 ="hello"
+	token_secret1="moto"
 	token, token_secret = session['token']
-	token1 = str(token)
-	token_secret1 = str(token_secret1)
+
 	
 	sql_select_Query = "INSERT INTO 'sessioninfo'(token, token_secret) VALUES (%s,%s)",(token1,token_secret1)
 	cursor = mysql.connection.cursor()
