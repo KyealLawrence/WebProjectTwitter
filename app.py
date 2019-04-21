@@ -189,6 +189,6 @@ def tweet():
 		auth.set_access_token(token,token_secret)
 		user = tweepy.API(auth)
 		singin = user.me()
-		singin.update_status(tweet)
+		user.update_status(tweet)
 	return render_template('home.html')
 
