@@ -180,3 +180,9 @@ def login():
 def analytics():
 	return render_template('register.html')
 
+@app.route("/tweet",methods=['GET','POST'])
+def tweet():
+	if request.method == 'POST':
+		singin.update_status(tweet)
+	return render_template('home.html')
+
