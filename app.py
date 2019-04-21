@@ -51,10 +51,7 @@ def auth():
 @app.route("/profile")
 def getprofile():
 	token, token_secret = session['token']
-	authorized['token'] = session['token'].value()
-	authorized['token_secret'] = session['token'].value()
-
-	
+		
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
 	auth.set_access_token(token,token_secret)
 	user = tweepy.API(auth)
@@ -133,10 +130,6 @@ def getfriends():
 
 @app.route("/timeline")
 def timeline():
-	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
-	auth.set_access_token(authorized.get('token'),authorized.get('token_secret'))
-	api = tweepy.API(auth)
-
 	new_tweets = api.home_timeline(count=5)
 	users = tweepy.Cursor(api.followers, screen_name=my_info.name).items(10)
 
