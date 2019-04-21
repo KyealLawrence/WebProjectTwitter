@@ -49,7 +49,7 @@ def auth():
 def getprofile():
 	token, token_secret = session['token']
 	
-	sql_select_Query = "INSERT INTO 'sessioninfo'('token', 'token_secret') VALUES (%s,%s)",(token,token_secret)
+	sql_select_Query = "INSERT INTO 'sessioninfo'(token, token_secret) VALUES (%s,%s)",(token,token_secret)
 	cursor = mysql.connection.cursor()
 	cursor.execute(sql_select_Query)
 	connection.commit()
