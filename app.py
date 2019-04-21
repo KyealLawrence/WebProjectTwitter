@@ -130,7 +130,7 @@ def getfriends():
 @app.route("/timeline")
 def timeline():
 	auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
-	auth.set_access_token(tokens[0],tokens[0])
+	auth.set_access_token(tokens,tokens)
 	api = tweepy.API(auth)
 
 	new_tweets = api.home_timeline(count=5)
