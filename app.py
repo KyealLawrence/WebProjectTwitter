@@ -164,8 +164,7 @@ def login():
 			message = " No Account associated with that email"
 			return render_template('register.html',message=message)
 		for word in record:
-			print(word)
-			if password == word:
+			if password in word:
 				return render_template('success.html',message=yay)
 		return render_template('register.html',message=message)
 
