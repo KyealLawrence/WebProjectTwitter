@@ -23,7 +23,7 @@ def get_user_informations(user):
     print("User Follower count \t:" + str(my_info.followers_count))
     print("User Screen name \t:" + user.screen_name)
     print("User Follower count \t:" + str(user.followers_count))
-    print ("Status \t: "+ user.status.text)
+    print ("Status \t: "+ user.description)
     print("\n")
   
 

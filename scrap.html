@@ -1,109 +1,176 @@
- <div class="twPc-div">
-    <a class="twPc-bg twPc-block"></a>
 
-      <div>
-    <div class="twPc-button">
-            <!-- Twitter Button | you can get from: https://about.twitter.com/tr/resources/buttons#follow -->
-            <a href="https://twitter.com/kyeallawrence" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false" data-dnt="true">Follow user</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-            <!-- Twitter Button -->   
-    </div>
+from flask import Flask, request, jsonify, render_template,url_for,session,redirect
+from flask_sqlalchemy import SQLAlchemy
+from flask_mysqldb import MySQL
+import tweepy
+import sys
+from random import randint
+import os
+from authlib.flask.client import OAuth
 
-    <a title="Mert S. Kaplan" href="/static/images/user.png" class="twPc-avatarLink">
-      <img alt="Mert S. Kaplan" src="/static/images/user.png" class="twPc-avatarImg">
-    </a>
 
-    <div class="twPc-divUser">
-      <div class="twPc-divName">
-        <a href="#">Username</a>
-      </div>
-      <span>
-        <a href="#">@<span>username</span></a>
-      </span>
-    </div>
 
-    <div class="twPc-divStats">
-      <ul class="twPc-Arrange">
-        <li class="twPc-ArrangeSizeFit">
-          <a href="#" title="9.840 Tweet">
-            <span class="twPc-StatLabel twPc-block">Tweets</span>
-            <span class="twPc-StatValue">9.840</span>
-          </a>
-        </li>
-        <li class="twPc-ArrangeSizeFit">
-          <a href="#" title="885 Following">
-            <span class="twPc-StatLabel twPc-block">Following</span>
-            <span class="twPc-StatValue">885</span>
-          </a>
-        </li>
-        <li class="twPc-ArrangeSizeFit">
-          <a href="#" title="1.810 Followers">
-            <span class="twPc-StatLabel twPc-block">Followers</span>
-            <span class="twPc-StatValue">1.810</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-<br>
-<div class="twPc-div" style="position: initial;">
-    <a class="twPc-bg twPc-block"></a>
+app = Flask(__name__)
+mysql = MySQL(app)
 
-      <div>
-    <div class="twPc-button">
-            <!-- Twitter Button | you can get from: https://about.twitter.com/tr/resources/buttons#follow -->
-            <a href="https://twitter.com/kyeallawrence" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false" data-dnt="true">Follow user</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-            <!-- Twitter Button -->   
-    </div>
+SECRET_KEY = 'Please work'
+app.secret_key = SECRET_KEY
 
-    <a title="Mert S. Kaplan" href="/static/images/user.png" class="twPc-avatarLink">
-      <img alt="Mert S. Kaplan" src="/static/images/user.png" class="twPc-avatarImg">
-    </a>
+consumer_key="SZDw1y6xV30grFmnNQcm7Wp4Z"
+consumer_secret="r3xR5eVKMySvbTAc3mExgaZZw9NwLmzSbyYksi3E8GnDxYug7H"
+access_token="513405864-ceWliYQUYlGGcg1FduKRDpHslL83eRDuI1z69aVK"
+access_token_secret="mZB3zIWNQBAbHWmgfwmzTy9nHWlMHh7U7QHZ18Q3z2k9g"
 
-    <div class="twPc-divUser">
-      <div class="twPc-divName">
-        <a href="#">Username</a>
-      </div>
-      <span>
-        <a href="#">@<span>username</span></a>
-      </span>
-    </div>
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+api = tweepy.API(auth)
+my_info= api.me()
 
-    <div class="twPc-divStats">
-      <ul class="twPc-Arrange">
-        <li class="twPc-ArrangeSizeFit">
-          <a href="#" title="9.840 Tweet">
-            <span class="twPc-StatLabel twPc-block">Tweets</span>
-            <span class="twPc-StatValue">9.840</span>
-          </a>
-        </li>
-        <li class="twPc-ArrangeSizeFit">
-          <a href="#" title="885 Following">
-            <span class="twPc-StatLabel twPc-block">Following</span>
-            <span class="twPc-StatValue">885</span>
-          </a>
-        </li>
-        <li class="twPc-ArrangeSizeFit">
-          <a href="#" title="1.810 Followers">
-            <span class="twPc-StatLabel twPc-block">Followers</span>
-            <span class="twPc-StatValue">1.810</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
 
-for x in range(4):
-    number = randint(1, 20)
-    furl = top[number].profile_image_url
-    fname = top[number].name
-    fat = top[number].screen_name
+app.config['MYSQL_HOST'] = 'remotemysql.com'
+app.config['MYSQL_USER'] = '6iY42OOgiZ'
+app.config['MYSQL_PASSWORD'] = '0saospJkqw'
+app.config['MYSQL_DB'] = '6iY42OOgiZ'
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
-    sql_select_Query = "insert into 'sessioninfo' ('token', 'token_secret') VALUES (%s,%s)",(token,token_secret)
+
+
+
+callback = 'https://floating-cliffs-24637.herokuapp.com/callback'
+
+@app.route('/auth')
+def auth():
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
+    url = auth.get_authorization_url()
+    session['request_token'] = auth.request_token
+    return redirect(url)
+
+@app.route("/profile")
+def getprofile():
+  token, token_secret = session['token']
+    
+  auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
+  auth.set_access_token(token,token_secret)
+  user = tweepy.API(auth)
+  singin = user.me()
+
+  followers = str(singin.followers_count)
+  following = str(singin.friends_count)
+  tweets = str(singin.statuses_count)
+  favtweets = str(singin.favourites_count)
+  x = randint(1,50)
+  friend = tweepy.Cursor(user.followers, screen_name=singin.name).items(x)
+  for f in friend:
+    friendurl=f.profile_image_url
+    friendname=f.name
+    friendat=f.screen_name
+    friendtweet=f.status.text
+
+  new_tweets = user.user_timeline(count=20)
+
+
+  user = {
+    'username':singin.name,
+    'at':singin.screen_name,
+    'bio':singin.description,
+    'followers':followers,
+    'following':following,
+    'tweets':tweets,
+    'favtweets':favtweets,
+    'website':singin.url,
+    'datecreated':singin.created_at,
+    'profilepic':singin.profile_image_url,
+    'friendurl':friendurl,
+    'friendname':friendname,
+    'friendat':friendat,
+    'friendtweet':friendtweet,
+    'hometweets':new_tweets,
+    } 
+
+  return render_template('profile.html', user=user)
+
+@app.route('/callback')
+def twitter_callback():
+  request_token = session['request_token']
+  del session['request_token']
+  auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
+  auth.request_token = request_token
+  verifier = request.args.get('oauth_verifier')
+  auth.get_access_token(verifier)
+  session['token'] = (auth.access_token, auth.access_token_secret)
+  return redirect('/profile')
+    
+
+
+@app.route("/")
+def hello():
+  return render_template('index.html')
+
+@app.route("/table",methods=['GET'])
+def table():
+  sql_select_Query = "select * from Users"
   cursor = mysql.connection.cursor()
   cursor.execute(sql_select_Query)
-  connection.commit()
-  connection.close()
+  records = cursor.fetchall()
+  return render_template('table.html',user=records)
+
+@app.route("/filteredtweets",methods=['GET'])
+def getfilteredtweets():
+  filtered = tweepy.Cursor(api.search,q="gameofthrones").items(10)
+  return render_template('tweets.html',tweets=filtered)
+
+
+
+@app.route("/friends")
+def getfriends():
+  return render_template('friends.html')
+
+@app.route("/timeline")
+def timeline(): 
+  new_tweets = api.home_timeline(count=5)
+  users = tweepy.Cursor(api.followers, screen_name=my_info.name).items(5)
+  return render_template('home.html',tweets=new_tweets,me=my_info,users=users)
+
+
+@app.route("/signup", methods=['GET','POST'])
+def signup():
+  if request.method == 'POST':
+    message = " Account created !"
+    fail = " Error in creating account please try again"
+    email = request.form['email']
+    password = request.form['confirmpassword']
+    conn = mysql.connect
+    cursor = conn.cursor()
+    try:
+      cursor.execute("Insert Into Users (email, password) VALUES ('" + email + "', '" + password + "')")
+      conn.commit()
+      return render_template('register.html',message=message,success=email)
+    except Exception as e:
+      print(e)
+  return render_template('register.html',message=fail)
+
+@app.route("/login", methods=['GET','POST'])
+def login():
+  if request.method =='POST':
+    message = "Login failed invalid password !"
+    yay = " successfully logged in ....... now what ?"
+    email = str(request.form['email'])
+    password = str(request.form['password'])
+    conn = mysql.connect
+    cursor = conn.cursor()
+    cursor.execute("select password from Users where email ='"+email+"'")
+    record = cursor.fetchall()
+    if (len(record)==0):
+      message = " No Account associated with that email"
+      return render_template('register.html',message=message)
+    for word in record:
+      if password in word:
+        return render_template('success.html',message=yay)
+    return render_template('register.html',message=message)
+
+
+  
+@app.route("/analytics")
+def analytics():
+  return render_template('register.html')
+
