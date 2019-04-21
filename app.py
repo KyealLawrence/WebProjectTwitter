@@ -183,6 +183,12 @@ def analytics():
 @app.route("/tweet",methods=['GET','POST'])
 def tweet():
 	if request.method == 'POST':
+		tweet = request.form['tweetbox']
+		token, token_secret = session['token']		
+		auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
+		auth.set_access_token(token,token_secret)
+		user = tweepy.API(auth)
+		singin = user.me()
 		singin.update_status(tweet)
 	return render_template('home.html')
 
