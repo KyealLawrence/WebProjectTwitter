@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Timeline</title>
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link href="{{ url_for('static', filename='css2/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css2/mdb.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css2/style.min.css') }}" rel="stylesheet">
+
+
+</head>
+
+<body class="grey lighten-3">
+
+    <header>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+            <div class="container">
+
+                <a class="navbar-brand waves-effect" href="/timeline" target="_blank"><strong class="blue-text">Timeline</strong></a>
+                <a class="navbar-brand waves-effect" href="/timeline" target="_blank"><strong class="blue-text"></strong></a>
+                <a class="navbar-brand waves-effect" href="/profile" target="_blank"><strong class="black-text">Profile</strong></a>
+                <a class="navbar-brand waves-effect" href="/analytics" target="_blank"><strong class="black-text">Analytics</strong></a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
+
+            </div>
+        </nav> 
+    </header>
+
+    <main class="mt-5 pt-5">
+        <div class="container">
+
+            <!--Section: Post-->
+            <section class="mt-4">
+
+                <!--Grid row-->
+                <div class="row">
+
+                    <!--Grid column-->
+                    <div class="col-md-8 mb-4"> 
+                        <div class="card mb-4 wow fadeIn">                             
+                        <div style="padding: 20px">
+                            <hr>
+                            <img src="{{me.profile_image_url}}" class="img-responsive zmdi zmdi-link" alt="profile img" width="50" height="50">
+                            <br><br>
+
+                            <input type="text" class="form-control" placeholder="What' s happening .."><marquee> <h4 class="text-muted"> Post a tweet here </h4> </marquee>
+                            <br>
+                             <div class="input-group">
+                                    <button type="button" class="btn btn-info btn-sm"><span class="input-group-addon">Tweet</span></button>
+                                    <hr>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                          {% for tweet in tweets %}
+                        <!--Card-->
+                        <div class="card mb-4 wow fadeIn">
+                          
+                            <div class="card-body">
+                                
+
+                                <img src="{{tweet.user.profile_image_url}}" width="50" height="50" class="img-fluid rounded-circle" alt="Profile pic">
+                                <h4>{{tweet.user.name}}</h4>
+                                <h5 class="text-muted">@{{tweet.user.screen_name}}</h5>
+                                <blockquote class="blockquote">
+                                <p class="mb-0">{{tweet.text}}</p>
+                                </blockquote>
+
+                                <span style='font-size:15px;'>&#10084;&#65039; </span> {{tweet.favorite_count}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                <span style='font-size:15px;'>&#x267B;&#xFE0F; </span> {{tweet.retweet_count}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   
+                                <span style='font-size:15px;'>&#128241; </span> {{tweet.source}}
+
+                                
+                            </div>
+                            
+                        </div>
+                        {% endfor %}
+                     </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-4 mb-4">
+
+                     <div class="card mb-4 wow fadeIn">
+
+                        <div class="card-header">Recently Followed</div>
+
+                        <!--Card content-->
+                        <div class="card-body">
+                                {% for user in users %}
+                            <ul class="list-unstyled">
+                                <li class="media">
+                                   <img src="{{user.profile_image_url}}" class="img-responsive zmdi zmdi-link" alt="profile img" width="50" height="50">
+                                    <div class="media-body">
+                                        <a href=""><h5 class="mt-0 mb-1 font-weight-bold">{{user.screen_name}}</h5> </a>
+                                         Followers: {{user.followers_count}}<br>
+                                         Following : {{user.friends_count}} <br>
+                                         Bio: {{user.status.bio}}
+                                    </div>
+                                </li>
+                                <br>
+                                <hr>
+                                <br>
+                                  {% endfor %}    
+                            </ul>
+
+                        </div>
+
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+        </section>
+        <!--Section: Post-->
+
+    </div>
+</main>
+<!--Main layout-->
+
+<!--Footer-->
+
+
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
+<!-- Initializations -->
+<script type="text/javascript">
+// Animations initialization
+new WOW().init();
+</script>
+</body>
+
+</html>

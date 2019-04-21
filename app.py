@@ -61,7 +61,6 @@ def getprofile():
 		friendat=f.screen_name
 		friendtweet=f.status.text
 
-
 	new_tweets = user.user_timeline(count=20)
 
 
@@ -121,6 +120,9 @@ def getfilteredtweets():
 def getfriends():
 	return render_template('friends.html')
 
-@app.route("/test")
-def signin():
-	return render_template('singin.html')
+@app.route("/timeline")
+def timeline():
+	new_tweets = api.home_timeline(count=5)
+	users = tweepy.Cursor(api.followers, screen_name=my_info.name).items(10)
+
+	return render_template('home.html',tweets=new_tweets,me=my_info,users=users)
