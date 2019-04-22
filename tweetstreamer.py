@@ -3,10 +3,10 @@ import tweepy
 import sys
 
 
-consumer_key="sd47vblI6MNSEXXOdQw26KUpn"
-consumer_secret="z6IvOle6ImR3yGSJ5GLeudB0XMfjUOt3MFPPHtdVy5zw8QyjFV"
-access_token="513405864-ocNwIksfXSgjImZHlM2HuinDGmYfpnpFJbNIIC1Z"
-access_token_secret="UI9YBbbaExHZwPtKo96aGiUQzxX8QO2qv5Gvr8vKnGn4w"
+consumer_key="SZDw1y6xV30grFmnNQcm7Wp4Z"
+consumer_secret="r3xR5eVKMySvbTAc3mExgaZZw9NwLmzSbyYksi3E8GnDxYug7H"
+access_token="513405864-ceWliYQUYlGGcg1FduKRDpHslL83eRDuI1z69aVK"
+access_token_secret="mZB3zIWNQBAbHWmgfwmzTy9nHWlMHh7U7QHZ18Q3z2k9g"
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
@@ -20,12 +20,8 @@ class MyStreamListener(tweepy.StreamListener):
 		self.limit = 10
 
 	def on_status(self, status):
-		print(status.user.profile_image_url_https)
-		print(status.user.name+"  @"+status.user.screen_name+" Tweeted from "+status.source)
 		tweettext.append(status.text)
-		print("Tweet "+status.text)
-		print("testing stuff")
-		print(status.user.location)
+		tweettext.append(status.user.location)
 		self.counter += 1
 		if self.counter < self.limit:
 			print("Number of tweets captured so far: {}".format(self.counter))
@@ -41,7 +37,7 @@ class MyStreamListener(tweepy.StreamListener):
     
 
 
-myStream = tweepy.Stream(auth, listener=MyStreamListener())
+myStream = tweepy.Stream(auth=api.auth, listener=MyStreamListener())
 
 LOCATIONS = [-64.0084,10.001,-59.1744,18.9787,
 			 -79.41,16.54,-75.26,19.01,
@@ -50,9 +46,9 @@ LOCATIONS = [-64.0084,10.001,-59.1744,18.9787,
 			 -74.15,20.71,-70.54,22.49]    
 
 languages = ['en']
-track = ['GameofThrons','jamie','Bran','Champions League']
+track = ['iphone']
 
-new_tweets=myStream.filter(locations=LOCATIONS,languages=languages,track=track)
+myStream.filter(track=['python'])
 
 def finder(word,array):
 	count = 0
@@ -64,10 +60,11 @@ def finder(word,array):
 numbers = []
 searchedwords=[]
 
-for i in range(len(track)):
-	numbers.append(finder(track[i],tweettext))
-	searchedwords.append(track[i])
+word = "iphone"
+#total = finder(word,tweettext)
 
 
-print (numbers)
-print(searchedwords)
+
+
+print(tweettext)
+

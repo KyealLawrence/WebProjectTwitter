@@ -171,11 +171,12 @@ def login():
 			return render_template('register.html',message=message)
 		for word in record:
 			if password in word:
-				return render_template('analytics.html')
+				return redirect("/welcome")
 		return render_template('register.html',message=message)
 
 
-	
+
+
 @app.route("/analytics")
 def analytics():
 	return render_template('register.html')
@@ -199,56 +200,43 @@ def tweet():
 
 tweetdata=[]
 
-class MyStreamListener(tweepy.StreamListener):
-	def __init__(self):
-		super().__init__()
-		self.counter = 0
-		self.limit = 10
 
-	def on_status(self, status):
-		tweettext.append(status.text)
-		self.counter += 1
-		if self.counter < self.limit:
-			return True
-		else:
-			myStream.disconnect()
 
-	def on_error(self, status_code):
-		if status_code == 420:
- 		#returning False in on_data disconnects the stream
-			return False
-
-def finder(word,array):
-	count = 0
-	for x in array:
-		if word in x:
-			count=count +1
-	return count
-
-def toDict(self):
-        return {
-            'id': self.s_id,
-            'result': self.result,
-            'criteria': self.criteria,
-            'total': self.totaltweets
-        }
-
-@app.route("/search",methods=['GET','POST'])
+@app.route("/search",methods=['POST'])
 def search():
 	if request.method == 'POST':
 		key = request.form['key']
-		myStream = tweepy.Stream(auth, listener=MyStreamListener())
-		count = finder(key,tweetdata)
-		total = len(tweetdata)
-		conn = mysql.connect
-		cursor = conn.cursor()
-		cursor.execute("Insert Into SearchData (result, criteria,totaltweets) VALUES ('" + count + "', '" + key + "','" + total + "')")
-		conn.commit()
-		cursor.execute("select result,criteria,totaltweets from SearchData")
-		records = cursor.fetchall()
-		records = list(map(lambda object: object.toDict(), records))
-		records = jsonify(records)
-		return records
+		token, token_secret = session['token']		
+		auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
+		auth.set_access_token(token,token_secret)
+		user = tweepy.API(auth)
+		singin = user.me()
+		filtered = tweepy.Cursor(user.search,q=key).items(5)
+		for tweet in filtered:
+			tid = tweet.id
+			text = tweet.text
+			name = tweet.user.screen_name
+			source = tweet.source
+			conn = mysql.connect
+			cursor = conn.cursor()
+			cursor.execute("Insert Into tweet (id_str,tweet,username,source) VALUES ('" + tid + "', '" + text + "','" + name + "','" + source + "')")
+			conn.commit()
+		return redirect("/welcome")
+
+@app.route("/welcome")
+def showpage():
+	return render_template('analytics.html')
+
+@app.route("/tabledata",methods=['GET'])
+def loadtable():
+	conn = mysql.connect
+	cursor = conn.cursor()
+	cursor.execute("select tid,text,name,source from tweet")
+	records = cursor.fetchall()
+	records = jsonify(records)
+	return records
+
+
 
 @app.route("/option1")
 def get():

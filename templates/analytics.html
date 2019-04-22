@@ -128,9 +128,55 @@
                   </div>
 
             <!-- Table -->
-             {% block content %}
+            {% block content %}
      
             
            {% endblock %}
+
+           <br>
+           <br>
+            <table class="table table-striped able-sm table-bordered">
+                
+                    <thead>
+                       
+                        <tr>
+                            <th>ID</th><th>Tweet</th><th>User name</th><th>Source</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list">
+                    </tbody>
+            </table>
+
+        <script type="text/javascript">
+ 
+                // Ajax Get 
+            $(document).ready(function()
+            {
+                $.ajax(
+                {
+                    type:'Get',
+                    url:'/tabledata',
+                    processData:false,
+                    contentType:false
+                }
+                ).done(function(data)
+                {
+                    let tableHTML = ""                
+                    console.log(data)
+                    for(let rec of data)
+                    {
+                        tableHTML+=`<tr>
+                                    <td>`+rec[0]+`</td>
+                                    <td>`+rec[1]+`</td>
+                                    <td>`+rec[2]+`</td>
+                                    <td>`+rec[3]+`</td>
+                                </tr>`;
+                        document.querySelector("#list").innerHTML = tableHTML
+                    }
+                });
+            });
+
+        </script>
+
 </body>
 </html>
