@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<!------ Include the above in your HEAD tag ---------->
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Analytics</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}"rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{{ url_for('static', filename='css/mdb.min.css') }}"rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="{{ url_for('static', filename='css/style.min.css') }}"rel="stylesheet">
+      <link href="{{ url_for('static', filename='css2/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css2/mdb.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css2/style.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/analytics.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+</head>
+
+<style>
+
+</style>
+
+
+
+
+<body class="grey lighten-3">
+
+        <header>
+
+                <!-- Navbar -->
+                <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+                    <div class="container">
+        
+                        <!-- Brand -->
+                        <a class="navbar-brand waves-effect" href="#" target="_blank">
+                            <strong class="blue-text">Twitter Metro</strong>
+                        </a>
+        
+                        <!-- Collapse -->
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+        
+                        <!-- Links -->
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        
+                            <!-- Left -->
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link waves-effect" href="#">Analytics
+                                        <span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+                            </ul>
+        
+                        
+                        </div>
+        
+                    </div>
+                </nav> 
+                <!-- Navbar -->
+        
+            </header>
+
+            <!-- Sidebar -->
+
+            <div id="wrapper">
+
+                    <div id="sidebar-wrapper">
+                        <ul class="sidebar-nav">
+                            <li class="sidebar-brand">
+                                <a href="#">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/option1">Search Whats up</a>
+                            </li>
+                            <li>
+                                <a href="/option2">Carribean Timeline</a>
+                            </li>
+                            <li>
+                                <a href="/option3">Filtered Timeline</a>
+                            </li>
+                           
+                        </ul>
+                    </div>
+                    <!-- /#sidebar-wrapper -->
+            
+            
+                </div>
+                <!-- /#wrapper -->
+
+                <!-- Page Content -->
+                <div id="page-content-wrapper">
+                    <div class="container-fluid">
+                        <div class="row">
+                                
+                        </div>
+                    </div>
+                </div>
+            <!-- /#page-content-wrapper -->
+
+
+            <!-- Jumbotron -->
+
+            <div class="jumbotron">
+                    <div class="container">
+                        <h2> Welcome to Twitter Metro </h2>
+                      <p>
+                       Here you'd be able to analyze data (tweets) that only from the Carribean our system is set up that all the data collected is from the Carribean, allowing you as a busines sowner to better understand your market</p>
+                    </div>
+                  </div>
+
+            <!-- Table -->
+             {% block content %}
+     
+            
+           {% endblock %}
+</body>
+</html>

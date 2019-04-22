@@ -1,0 +1,113 @@
+{% extends "analytics.html" %}
+
+{% block content %}
+<table class="table table-striped able-sm table-bordered">
+                    <thead>
+                       
+                        <tr>
+                            <th>ID</th><th>Result</th><th>Criteria</th><th>Total Tweets</th><th></th><th></th><th></th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td scope="row">1</td>
+                        <td scope="col" >10</td>
+                        <td scope="col"> Games</td>
+                        <td scope="col">200</td>
+                        <td scope="col"><button type="button" class="btn btn-primary btn-sm">Update</button></td>
+                        <td scope="col"><button type="button" class="btn btn-danger btn-sm">Delete</button></td>
+                        <td scope="col"><button type="button" class="btn btn-dark btn-sm">Show Graph</button></td>
+                        
+                    </tr>
+                    <tr>
+                        <td scope="row">1</td>
+                        <td scope="col" >10</td>
+                        <td scope="col"> Games</td>
+                        <td scope="col">200</td>
+                        <td scope="col"><button type="button" class="btn btn-primary btn-sm">Update</button></td>
+                        <td scope="col"><button type="button" class="btn btn-danger btn-sm">Delete</button></td>
+                        <td scope="col"><button type="button" class="btn btn-dark btn-sm">Show Graph</button></td>
+                    </tr>
+                    <tr>
+                        <td scope="row">1</td>
+                        <td scope="col" >10</td>
+                        <td scope="col"> Games</td>
+                        <td scope="col">200</td>
+                        <td scope="col"><button type="button" class="btn btn-primary btn-sm">Update</button></td>
+                        <td scope="col"><button type="button" class="btn btn-danger btn-sm">Delete</button></td>
+                        <td scope="col"><button type="button" class="btn btn-dark btn-sm">Show Graph</button></td>
+                    </tr>
+            </table>
+            <div id="container" style="width: 30%; height: 400px; position:absolute; right:10%; top:33%;">
+                   <script>
+                        Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Chart showing results'
+    },
+    subtitle: {
+        text: 'All these tweets were captured from the carrbean'
+    },
+    xAxis: {
+        type: 'Results'
+    },
+    yAxis: {
+        title: {
+            text: 'Total # of tweets'
+        }
+
+    },
+    legend: {
+        enabled: false
+    },
+    plotOptions: {
+        series: {
+            borderWidth: 0,
+            dataLabels: {
+                enabled: true,
+                format: '{point.y:.1f}%'
+            }
+        }
+    },
+
+    tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+    },
+
+    series: [
+        {
+            name: "Total",
+            colorByPoint: true,
+            data: [
+                {
+                    name: "Tweets collected",
+                    y: 200,
+                    drilldown: "Total"
+                },
+                {
+                    name: "Tweets about criteria",
+                    y: 87,
+                    drilldown: "Criteria"
+                }
+                            
+            ]
+        }
+    ],
+   
+        
+    
+});
+</script>
+            </div>
+               
+
+                 <!-- Menu Toggle Script -->
+                <script>
+                $("#menu-toggle").click(function(e) {
+                    e.preventDefault();
+                    $("#wrapper").toggleClass("toggled");
+                });
+                </script>
+{% endblock %}
