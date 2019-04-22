@@ -190,9 +190,8 @@ def tweet():
 		auth.set_access_token(token,token_secret)
 		user = tweepy.API(auth)
 		singin = user.me()
-		user.update_status(tweet)
-		singin = user.me()
-		new_tweets = user.home_timeline(count=5)
+
+		new_tweets = api.home_timeline(count=5)
 		users = tweepy.Cursor(user.followers, screen_name=singin.name).items(10)
 		return render_template('home.html',tweets=new_tweets,me=singin,users=users)
 
@@ -206,12 +205,7 @@ tweetdata=[]
 def search():
 	if request.method == 'POST':
 		key = request.form['key']
-		token, token_secret = session['token']		
-		auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback)
-		auth.set_access_token(token,token_secret)
-		user = tweepy.API(auth)
-		singin = user.me()
-		filtered = tweepy.Cursor(user.search,q=key).items(5)
+		filtered = tweepy.Cursor(api.search,q=key).items(5)
 		for tweet in filtered:
 			tid = tweet.id
 			text = tweet.text
