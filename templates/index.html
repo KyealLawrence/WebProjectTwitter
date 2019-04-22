@@ -1,32 +1,121 @@
-<!DOCTYPE HTML>
-<html lang = "en">
-<head>
-  <title>Home</title>
-  <meta charset = "UTF-8" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>    
-</head>
-<body>
+<!DOCTYPE html>
+<html lang="en">
 
-  <div class="container">
-  <div class="jumbotron">
-    <h1>Well its Working </h1> 
-    <p>Hope you get to sign in </p> 
-  </div>
-   <h1 class="animated bounceInDown">Not enough money making</h1>
-   <hr>
-   <a href="/auth">
-      <img border="0" alt="Login IN" src="/static/images/sign-in-with-twitter-gray.png">
-    </a>
-    <a href ="/analytics"><button  type="button" class="btn btn-warning">Analytics</button></a>
-</div>
-  {% block content %}
-     {% endblock %} 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Home</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='css2/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{{ url_for('static', filename='css2/mdb.min.css') }}" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/4.12.0/bootstrap-social.min.css">    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">   
+
+</head>
+
+<style>
+    .jumbotron{
+        margin-top: 8%;
+        margin-left: 25%;
+        width: 50%;
+        background-color: rgba(15, 202, 226, 0.39);
+        height: 150px;
+        text-align: center;
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+    .signin{
+        margin-top:5%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .analytics{
+        margin-top: 5%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       
+    }
+
+    .footer{
+        text-align: center;
+        margin-top: 5%;
+        font-weight:  bold;
+        font-size: 15px;
+    }
+
+
+   
+</style>
+
+<body class="grey lighten-3">
+
+    <!--Main Navigation-->
+    <header>
+
+        <!-- Navbar -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+            <div class="container">
+
+                <!-- Brand -->
+                <a class="navbar-brand waves-effect" href="/" target="_blank">
+                    <strong class="blue-text">Twitter Metro</strong>
+                </a>
+
+                <!-- Collapse -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Links -->
+                
+            </div>
+        </nav> 
+        <!-- Navbar -->
+
+    </header>
+           <!-- main area -->
+
+
+        <div class="animated tada">
+
+            <div class="jumbotron">
+                Welcome to Twitter Metro
+            </div>
+
+        </div>
+
+        <div class="animated bounceInDown">
+            <div class="container">
+            <div class="signin">
+                    <a id="twitter-button" href="/auth" class="btn btn-social btn-twitter"><i class="fa fa-twitter"></i> Sign in with Twitter</a>
+            </div>
+            </div>
+            
+            <div class="container">
+            <div class="analytics">
+                <a href="/analytics"><button class="btn btn-primary" >Analytics</button></a>
+            </div>
+            </div>
+        </div>
+
+        
+       
+    <div class="footer">
+        <footer>&copy Kreation Inc. 2019</footer>
+    </div>
 </body>
 </html>
-
-<router-outlet>
-  <!-- stuff to be rendered goes here -->
-</router-outlet>

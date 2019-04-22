@@ -207,7 +207,7 @@ def search():
 		key = request.form['key']
 		filtered = tweepy.Cursor(api.search,q=key).items(5)
 		for tweet in filtered:
-			tid = tweet.id
+			tid = str(tweet.id)
 			text = tweet.text
 			name = tweet.user.screen_name
 			source = tweet.source
@@ -225,7 +225,7 @@ def showpage():
 def loadtable():
 	conn = mysql.connect
 	cursor = conn.cursor()
-	cursor.execute("select tid,text,name,source from tweet")
+	cursor.execute("select id_str,tweet,username,source from tweet")
 	records = cursor.fetchall()
 	records = jsonify(records)
 	return records
@@ -236,10 +236,3 @@ def loadtable():
 def get():
 	return render_template('searchform.html')
 
-@app.route("/option2")
-def get2():
-	return render_template('tweettable.html')
-
-@app.route("/option3")
-def get3():
-	return render_template('tweettable.html')
