@@ -206,6 +206,12 @@ def search():
 	if request.method == 'POST':
 		key = request.form['key']
 		filtered = tweepy.Cursor(api.search,q=key).items(5)
+		if len(filtered) == 0:
+			conn = mysql.connect
+			cursor = conn.cursor()
+			cursor.execute("DELETE FROM tweet")
+			conn.commit()
+			return redirect("/welcome")			
 		for tweet in filtered:
 			tid = str(tweet.id)
 			text = str(tweet.text)
