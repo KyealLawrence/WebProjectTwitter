@@ -208,7 +208,7 @@ def search():
 		filtered = tweepy.Cursor(api.search,q=key).items(5)
 		for tweet in filtered:
 			tid = str(tweet.id)
-			text = tweet.text
+			text = str(tweet.text)
 			name = tweet.user.screen_name
 			source = tweet.source
 			conn = mysql.connect
